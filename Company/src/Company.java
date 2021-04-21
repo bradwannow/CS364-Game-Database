@@ -17,15 +17,21 @@ public class Company {
 			e.printStackTrace();
 		}
 		
-		
+		ArrayList<Game> games = new ArrayList<>();
 	
+		try {
+			 games = db.gameYearLookup((float)1999);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
-			ArrayList<Employee> employees = new ArrayList<>();
-			
-			
-	
+		//System.out.println(g);
 		
-		
+		for(int i = 0; i < games.size(); i++) {
+			System.out.println(games.get(i));
+		}
+
 		
 		try {
 			db.disconnect();

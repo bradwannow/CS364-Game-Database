@@ -3,16 +3,19 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import org.w3c.dom.Text;
+
+//import javax.xml.soap.Text;
+
+import java.math.*;
 
 public class Database {
 
-		
 	
-	
-	
-	private String url = "jdbc:sqlite:D:\\Program Files (x86)\\SQLiteStudio\\Company";
+	private String url = "jdbc:sqlite:D:\\Program Files (x86)\\SQLiteStudio\\GameDatabase.db";
 	private Connection connection;
-	
 	
 	private static final Database INSTANCE = new Database();
 	
@@ -36,33 +39,36 @@ public class Database {
 		return results;
 	}
 	
-	public Employee employeeLookup(String ssnSearch) throws SQLException {
-		String query = "SELECT SSN, Salary, FirstName, MiddleName, LastName FROM Employee WHERE SSN = ?";
+	public ArrayList<Game> gameYearLookup(Float YearSearch) throws SQLException {
+		String query = "SELECT Rank, Name, Platform, Genre, Year FROM Game WHERE Year = ?";
 		PreparedStatement stmt = connection.prepareStatement(query);
-		stmt.setString(1, ssnSearch);
+		stmt.setFloat(1, YearSearch);
 		ResultSet results = stmt.executeQuery();
+		ArrayList<Game> games = new ArrayList<>();
 		
-		Employee e = null;
+		Game g = null;
 		while(results.next()) {
-			String ssn = results.getString("SSN");
-			double salary = results.getDouble("Salary");
-			String firstName = results.getString("FirstName");
-			String middleName = results.getString("MiddleName");
-			String lastName = results.getString("LastName");
-			e = new Employee(ssn, salary, firstName, middleName, lastName);
+			//BigInteger index = BigInteger.valueOf(results.getLong("index"));
+			BigInteger Rank = BigInteger.valueOf(results.getLong("Rank"));
+			String Name = results.getString("Name");
+			String Platform = results.getString("Platform");
+			String Genre = results.getString("Genre");
+			Float Year = results.getFloat("Year");
+			g = new Game(Rank, Name, Platform, Genre, Year);
+			games.add(g);
 		}
 		
-		return e;
+		return games;
 	}
 	
-	public void insertEmployee(Employee e) throws SQLException {
-		String sql = "INSERT INTO Employee(SSN, Salary, FirstName, MiddleName, LastName) VALUES (?, ?, ?, ?, ?)";
+	public void insertGame(Game g) throws SQLException {
+		String sql = "INSERT INTO Game(index, Rank, Name, Platform, Genre, Year) VALUES (?, ?, ?, ?, ?)";
 		PreparedStatement stmt = connection.prepareStatement(sql);
-		stmt.setString(1, e.getSsn());
-		stmt.setDouble(2, e.getSalary());
-		stmt.setString(3, e.getFirstName());
-		stmt.setString(4, e.getMiddleName());
-		stmt.setString(5, e.getLastName());
+		stmt.setLong(1, Long.parseLong(g.getIndex().toString()));
+		stmt.setLong(2, Long.parseLong(g.getRank().toString()));
+		stmt.setString(3, g.getName());
+		stmt.setString(4, g.getGenre());
+		stmt.setFloat(5, g.getYear());
 		stmt.executeUpdate();
 	}
 	
