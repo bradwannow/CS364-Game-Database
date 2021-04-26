@@ -22,12 +22,26 @@ public Game(BigInteger index, BigInteger Rank, String Name, String Platform, Str
 }
 
 public Game(BigInteger Rank, String Name, String Platform, String Genre, Float Year) {
+	this.index = null;
 	this.Rank = Rank;
 	this.Name = Name;
 	this.Platform = Platform;
 	this.Genre = Genre;
 	this.Year = Year;
 }
+
+public Game(String Name, String Platform, String Genre, Float Year) {
+	final int MINIMUM = 70000;
+	BigInteger tempRank = BigInteger.valueOf((long) (Math.random() + MINIMUM));
+	this.index = null;
+	this.Rank = tempRank;
+	this.Name = Name;
+	this.Platform = Platform;
+	this.Genre = Genre;
+	this.Year = Year;
+}
+
+
 
 
 
