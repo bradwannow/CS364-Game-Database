@@ -78,15 +78,28 @@ public class Company {
 				e.printStackTrace();
 			}
 		}
+		
+		//Main body of the project, this will split into each advanced query group.
 		else if(userQuery.equals("SEARCH")) {
-			
+			System.out.println("Please provide an SQL query to search the database.");
+			String newQuery = userInput.nextLine();
+			try {
+				db.basicQuery(newQuery);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		else if(userQuery.equals("HELP")) {
 			System.out.println("To update the database, type 'UPDATE'");
 			System.out.println("To insert into the database, type 'INSERT'");
 			System.out.println("To delete a record from the database, type 'DELETE'");
 			System.out.println("To search the database, type 'SEARCH'");
+			System.out.println("For additional help on how to search the database, type 'SYNTAX HELP");
 			System.out.println("To exit the application, type 'EXIT'");
+		}
+		else if(userQuery.equals("SYNTAX HELP")) {
+			
 		}
 		else {
 			System.out.println("Unknown input. Try again or type 'HELP' for help!");
@@ -96,7 +109,6 @@ public class Company {
 		//end of while(true) loop
 		}
 		userInput.close();
-		
 		
 		
 		try {

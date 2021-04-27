@@ -61,6 +61,7 @@ public class Database {
 	}
 	
 	//This function is a sample one. It takes two tables and joins them.
+	//ITS USELESS NO IT DOESNT
 	public ArrayList<Game> joinStatement(String query) throws SQLException{
 		ArrayList<Game> results = new ArrayList<>();
 		PreparedStatement stmt = connection.prepareStatement(query);
@@ -71,6 +72,132 @@ public class Database {
 			System.out.println(rawResults.getFloat("Global_Sales"));
 		}
 		return results;
+	}
+	
+	
+	
+	public void basicQuery(String query) throws SQLException{
+		ArrayList<Game> results = new ArrayList<>();
+		PreparedStatement stmt = connection.prepareStatement(query);
+		ResultSet rawResults = stmt.executeQuery();
+		
+		while(rawResults.next()) {
+			//RANK
+			try {
+				if(rawResults.getLong("Rank") != 0) {
+					System.out.print("RANK: " + rawResults.getLong("Rank") + "  ");
+				}
+			} catch (SQLException e) {
+			}
+			//NAME
+			try {
+				if(rawResults.getString("Name")!= null) {
+					System.out.print("NAME: " + rawResults.getString("Name") + "  ");
+				}
+			} catch (SQLException e) {
+			}
+			//PLATFORM
+			try {
+				if(rawResults.getString("Platform") != null) {
+					System.out.print("PLATFORM: " + rawResults.getString("Platform") + "  ");
+				}
+			} catch (SQLException e) {
+			}
+			//GENRE
+			try {
+				if(rawResults.getString("Genre") != null) {
+					System.out.print("GENRE: " + rawResults.getString("Genre") + "  ");
+				}
+			} catch (SQLException e) {
+			}
+			//YEAR
+			try {
+				if(rawResults.getFloat("Year") != 0) {
+					System.out.print("YEAR: " + rawResults.getFloat("Year") + "  ");
+				}
+			} catch (SQLException e) {
+			}
+			//DEVELOPER
+			try {
+				if(rawResults.getString("Developer") != null) {
+					System.out.print("DEVELOPER: " + rawResults.getString("Developer") + "  ");
+				}
+			} catch (SQLException e) {
+			}
+			//PUBLISHER
+			try {
+				if(rawResults.getString("Publisher") != null) {
+					System.out.print("PUBLISHER: " + rawResults.getString("Publisher") + "  ");
+				}
+			} catch (SQLException e) {
+			}
+			//ESRB_RATING
+			try {
+				if(rawResults.getString("ESRB_Rating") != null) {
+					System.out.print("ESRB RATING: " + rawResults.getString("ESRB_Rating") + "  ");
+				}
+			} catch (SQLException e) {
+			}
+			//CRITIC SCORE
+			try {
+				if(rawResults.getFloat("Critic_Score") != 0) {
+					System.out.print("CRITIC SCORE: " + rawResults.getFloat("Critic_Score") + "  ");
+				}
+			} catch (SQLException e) {
+			}
+			//USER SCORE
+			try {
+				if(rawResults.getFloat("User_Score") != 0) {
+					System.out.print("USER SCORE: " + rawResults.getFloat("User_Score") + "  ");
+				}
+			} catch (SQLException e) {
+			}
+			//TOTAL SHIPPED
+			try {
+				if(rawResults.getFloat("Total_Shipped") != 0) {
+					System.out.print("TOTAL SHIPPED: " + rawResults.getFloat("Total_Shipped") + " Million  ");
+				}
+			} catch (SQLException e) {
+			}
+			//GLOBAL SALES
+			try {
+				if(rawResults.getFloat("Global_Sales") != 0) {
+					System.out.print("GLOBAL SALES: " + rawResults.getFloat("Global_Sales") + " Million  ");
+				}
+			} catch (SQLException e) {
+			}
+			//NA SALES
+			try {
+				if(rawResults.getFloat("NA_Sales") != 0) {
+					System.out.print("NORTH AMERICAN SALES: " + rawResults.getFloat("NA_Sales") + " Million  ");
+				}
+			} catch (SQLException e) {
+			}
+			//PAL SALES
+			try {
+				if(rawResults.getFloat("PAL_Sales") != 0) {
+					System.out.print("EUROPEAN SALES: " + rawResults.getFloat("PAL_Sales") + " Million  ");
+				}
+			} catch (SQLException e) {
+			}
+			//JP SALES
+			try {
+				if(rawResults.getFloat("JP_Sales") != 0) {
+					System.out.print("JAPANESE SALES: " + rawResults.getFloat("JP_Sales") + " Million  ");
+				}
+			} catch (SQLException e) {
+			}
+			//OTHER SALES
+			try {
+				if(rawResults.getFloat("Other_Sales") != 0) {
+					System.out.print("ALL OTHER SALES: " + rawResults.getFloat("Other_Sales") + " Million  ");
+				}
+			} catch (SQLException e) {
+			}
+			
+			
+			System.out.println();
+		}
 	}
 	
 	//This function inserts a NEW game into the Game table
