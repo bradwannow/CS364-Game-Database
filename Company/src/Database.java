@@ -214,7 +214,7 @@ public class Database {
 	
 	//This function deletes a game from the Game table
 	public void deleteGame(String g) throws SQLException {
-		String sql = "DELETE FROM Game WHERE Name = " + g;
+		String sql = "DELETE FROM Game WHERE Name = '"+ g + "'";
 		PreparedStatement stmt = connection.prepareStatement(sql);
 		stmt.executeUpdate();
 	}
